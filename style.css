@@ -1,0 +1,197 @@
+/* تنظیمات پایه تایپوگرافی */
+body {
+    font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+/* استایل کادر سند رسمی در صفحه نمایش */
+.proposal-paper {
+    position: relative;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* لایه پس‌زمینه واترمارک */
+.watermark-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0.08;
+    transform: rotate(-30deg);
+}
+
+.watermark-layer span {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #000000;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* پنهان کردن واترمارک در حالت فعال‌سازی لایسنس */
+body.is-pro .watermark-layer {
+    display: none !important;
+}
+
+/* کدهای مارک‌داون رندر شده داخل سند */
+.proposal-paper article h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.25rem;
+}
+
+.proposal-paper article h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+.proposal-paper article h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+    color: #334155;
+}
+
+.proposal-paper article p {
+    margin-bottom: 0.75rem;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.proposal-paper article ul, .proposal-paper article ol {
+    margin-right: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.proposal-paper article ul {
+    list-style-type: disc;
+}
+
+.proposal-paper article ol {
+    list-style-type: decimal;
+}
+
+.proposal-paper article li {
+    margin-bottom: 0.25rem;
+    line-height: 1.6;
+}
+
+/* جدول برآورد هزینه و زمان */
+.proposal-paper table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.proposal-paper table th, 
+.proposal-paper table td {
+    border: 1px solid #cbd5e1;
+    padding: 0.5rem 0.75rem;
+    text-align: right;
+}
+
+.proposal-paper table th {
+    background-color: #f1f5f9;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.proposal-paper table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* ظرف رندر دیاگرام Mermaid */
+.mermaid-box svg {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* ==========================================================================
+   قوانین دقیق چاپ سند رسمی (A4 Print Stylesheet)
+   ========================================================================== */
+@media print {
+    /* تنظیمات قطع استاندارد صفحه پرینت */
+    @page {
+        size: A4 portrait;
+        margin: 12mm 15mm 15mm 15mm;
+    }
+
+    /* پنهان‌سازی بخش‌های غیرقابل چاپ رابط کاربری */
+    .no-print,
+    header,
+    nav,
+    #input-panel,
+    #settings-modal,
+    #toast {
+        display: none !important;
+    }
+
+    /* ریست استایل بدنه در حالت پرینت */
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 11pt;
+    }
+
+    main {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    .proposal-paper {
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        min-height: auto !important;
+    }
+
+    /* حفظ ساختار واترمارک در نسخه رایگان هنگام چاپ */
+    .watermark-layer {
+        position: fixed;
+        opacity: 0.08 !important;
+    }
+
+    body.is-pro .watermark-layer {
+        display: none !important;
+    }
+
+    /* کنترل برش و تقسیم‌بندی صفحات */
+    .page-break-inside-avoid,
+    .mermaid-box,
+    table,
+    tr,
+    .proposal-header,
+    .proposal-footer {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* استایل‌های لینک‌ها در خروجی کاغذ */
+    a {
+        text-decoration: none !important;
+        color: #000000 !important;
+    }
+}
