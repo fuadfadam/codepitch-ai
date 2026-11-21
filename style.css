@@ -1,44 +1,44 @@
-/* استایل‌های پایه */
+/* تنظیمات پایه */
+* {
+    box-sizing: border-box;
+}
+
 body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    overflow-x: hidden;
 }
 
-/* ==========================================================================
-   واترمارک شبکه‌ای تکرارشونده در تمام صفحه
-   ========================================================================== */
+/* شبکه واترمارک واکنشی */
 .watermark-grid {
     position: absolute;
     inset: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 7rem 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 5rem 2rem;
     align-content: space-around;
     justify-items: center;
-    opacity: 0.12;
+    opacity: 0.10;
     pointer-events: none;
     user-select: none;
     overflow: hidden;
     transform: rotate(-25deg) scale(1.1);
-    z-index: 10;
+    z-index: 5;
 }
 
 .watermark-grid span {
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 800;
     white-space: nowrap;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     font-family: 'Inter', sans-serif;
 }
 
-/* حذف واترمارک برای نسخه Pro */
 body.is-pro .watermark-grid {
     display: none !important;
 }
 
-/* ==========================================================================
-   تم‌های سند رسمی (کاغذ روشن / کاغذ تیره)
-   ========================================================================== */
+/* تم‌های بصری کاغذ سند */
 .doc-theme-light {
     background-color: #ffffff !important;
     color: #0f172a !important;
@@ -66,7 +66,6 @@ body.is-pro .watermark-grid {
     color: #000000 !important;
 }
 
-/* تم تیره سند */
 .doc-theme-dark {
     background-color: #020617 !important;
     color: #f8fafc !important;
@@ -94,51 +93,51 @@ body.is-pro .watermark-grid {
     color: #ffffff !important;
 }
 
-/* استایل متون مارک‌داون */
+/* قالب‌بندی متون مارک‌داون */
 .proposal-paper article h1 {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 800;
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
-}
-.proposal-paper article h2 {
-    font-size: 1.15rem;
-    font-weight: 700;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
-.proposal-paper article h3 {
-    font-size: 1rem;
-    font-weight: 600;
+.proposal-paper article h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
     margin-top: 0.75rem;
+    margin-bottom: 0.35rem;
+}
+.proposal-paper article h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
     margin-bottom: 0.25rem;
 }
 .proposal-paper article p {
-    margin-bottom: 0.75rem;
-    line-height: 1.8;
+    margin-bottom: 0.6rem;
+    line-height: 1.75;
     text-align: justify;
 }
 .proposal-paper article ul, .proposal-paper article ol {
-    margin-right: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-right: 1.25rem;
+    margin-bottom: 0.6rem;
 }
 html[dir="ltr"] .proposal-paper article ul, 
 html[dir="ltr"] .proposal-paper article ol {
     margin-right: 0;
-    margin-left: 1.5rem;
+    margin-left: 1.25rem;
 }
 .proposal-paper article ul { list-style-type: disc; }
 .proposal-paper article ol { list-style-type: decimal; }
-.proposal-paper article li { margin-bottom: 0.25rem; }
+.proposal-paper article li { margin-bottom: 0.2rem; }
 
 .proposal-paper table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1rem 0;
-    font-size: 0.85rem;
+    margin: 0.75rem 0;
+    font-size: 0.8rem;
 }
 .proposal-paper table th, .proposal-paper table td {
-    padding: 0.5rem 0.75rem;
+    padding: 0.4rem 0.6rem;
 }
 
 .mermaid-box svg {
@@ -146,13 +145,11 @@ html[dir="ltr"] .proposal-paper article ol {
     height: auto !important;
 }
 
-/* ==========================================================================
-   قوانین پرینت A4
-   ========================================================================== */
+/* استایل‌های پرینت استاندارد A4 */
 @media print {
     @page {
         size: A4 portrait;
-        margin: 12mm 15mm 15mm 15mm;
+        margin: 10mm 12mm 12mm 12mm;
     }
     .no-print, header, nav, #input-panel, #settings-modal, #wallet-modal, #toast {
         display: none !important;
@@ -160,7 +157,9 @@ html[dir="ltr"] .proposal-paper article ol {
     body {
         padding: 0 !important;
         margin: 0 !important;
-        font-size: 10.5pt;
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 10pt;
     }
     main {
         max-width: 100% !important;
@@ -170,6 +169,7 @@ html[dir="ltr"] .proposal-paper article ol {
     }
     .proposal-paper {
         box-shadow: none !important;
+        border: none !important;
         border-radius: 0 !important;
         padding: 0 !important;
         margin: 0 !important;
@@ -178,7 +178,7 @@ html[dir="ltr"] .proposal-paper article ol {
     }
     .watermark-grid {
         position: fixed !important;
-        opacity: 0.12 !important;
+        opacity: 0.10 !important;
     }
     body.is-pro .watermark-grid {
         display: none !important;
