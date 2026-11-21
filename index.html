@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CodePitch AI | Universal Architecture Engine & Proposal Synthesizer</title>
     
+    <!-- آیکون اختصاصی صاعقه در دایره بنفش (Favicon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%235b5bf7'/%3E%3Cpath d='M53 18 L26 56 L47 56 L38 84 L74 44 L53 44 Z' fill='white'/%3E%3C/svg%3E">
+    
     <!-- قلم‌های استاندارد -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- موتور استایل Tailwind CSS -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,10 +28,10 @@
                         brand: {
                             50: '#eef2ff',
                             100: '#e0e7ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                            900: '#312e81',
+                            500: '#5b5bf7',
+                            600: '#4845e4',
+                            700: '#3c39c8',
+                            900: '#2b2788',
                         }
                     }
                 }
@@ -42,30 +45,29 @@
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
 
-    <!-- نوار ناوبری ریسپانسیو اول-موبایل -->
+    <!-- نوار ناوبری ریسپانسیو -->
     <header class="no-print bg-slate-800/95 dark:bg-slate-900/95 border-b border-slate-700/80 sticky top-0 z-40 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
             
-            <!-- لوگو و مشخصات برنامه -->
+            <!-- لوگو برنامه مطابق تصویر صاعقه -->
             <div class="flex items-center space-x-2.5 space-x-reverse min-w-0">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-brand-500/20 shrink-0">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#5b5bf7] flex items-center justify-center shadow-lg shadow-brand-500/25 shrink-0">
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 100 100" fill="currentColor">
+                        <path d="M53 18 L26 56 L47 56 L38 84 L74 44 L53 44 Z"/>
                     </svg>
                 </div>
                 <div class="truncate">
                     <div class="flex items-center gap-1.5">
                         <span class="text-sm sm:text-base font-extrabold tracking-tight text-white block truncate">CodePitch AI</span>
-                        <span class="text-[9px] bg-brand-500/20 text-brand-300 border border-brand-500/30 px-1 py-0.2 rounded font-mono hidden sm:inline-block">v2.0</span>
+                        <span class="text-[9px] bg-brand-500/20 text-brand-300 border border-brand-500/30 px-1 py-0.2 rounded font-mono hidden sm:inline-block">v2.1</span>
                     </div>
                     <p id="nav-subtitle" class="text-[10px] sm:text-xs text-slate-400 truncate hidden xs:block">موتور معماری سیستم و پروپوزال</p>
                 </div>
             </div>
 
-            <!-- جعبه ابزار و دکمه‌ها (فشرده در موبایل، کامل در دسکتاپ) -->
+            <!-- دکمه‌های کنترل و تنظیمات -->
             <div class="flex items-center space-x-1.5 sm:space-x-2 space-x-reverse shrink-0">
                 
-                <!-- تغییر تم تاریک/روشن برنامه -->
                 <button id="btn-toggle-ui-theme" title="تغییر تم" class="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-300 transition-colors">
                     <svg id="icon-theme-moon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -75,12 +77,10 @@
                     </svg>
                 </button>
 
-                <!-- تغییر زبان -->
                 <button id="btn-toggle-lang" title="Switch Language" class="h-8 sm:h-9 px-2 sm:px-2.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors font-mono">
                     EN
                 </button>
 
-                <!-- حمایت مالی و لایسنس -->
                 <button id="btn-open-wallet" title="حمایت مالی / فعال‌سازی Pro" class="h-8 sm:h-9 px-2 sm:px-2.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 transition-colors flex items-center gap-1.5 text-xs font-medium">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
@@ -88,7 +88,6 @@
                     <span id="txt-donate-btn" class="hidden md:inline">حمایت / Pro</span>
                 </button>
 
-                <!-- تنظیمات کلید API -->
                 <button id="btn-open-settings" title="تنظیمات API" class="h-8 sm:h-9 px-2 sm:px-2.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-300 transition-colors flex items-center gap-1.5 text-xs">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
@@ -97,7 +96,6 @@
                     <span id="txt-settings-btn" class="hidden md:inline">تنظیمات</span>
                 </button>
 
-                <!-- استخراج PDF -->
                 <button id="btn-print" title="چاپ یا دریافت فایل PDF" class="h-8 sm:h-9 px-2.5 sm:px-3 rounded-lg bg-brand-600 hover:bg-brand-500 text-white transition-colors flex items-center gap-1 text-xs font-bold shadow-md shadow-brand-600/30">
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
@@ -112,7 +110,7 @@
     <!-- کانتینر اصلی -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-5 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
         
-        <!-- فرم ورودی -->
+        <!-- فرم تنظیمات ورودی -->
         <section id="input-panel" class="no-print lg:col-span-5 bg-slate-800/90 border border-slate-700/80 rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
             <h2 id="lbl-panel-title" class="text-sm sm:text-base font-bold text-slate-200 border-b border-slate-700/80 pb-3 flex items-center gap-2">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,7 +154,7 @@
                 </div>
                 <div>
                     <label id="lbl-model-name" for="model-name-input" class="block text-xs font-medium text-slate-400 mb-1">شناسه دقیق مدل (آزاد)</label>
-                    <input type="text" id="model-name-input" value="gemini-3.8-flash" placeholder="شناسه مدل..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-500 font-mono text-left" dir="ltr">
+                    <input type="text" id="model-name-input" value="gemini-3.1-flash-lite" placeholder="شناسه مدل..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-500 font-mono text-left" dir="ltr">
                 </div>
             </div>
 
@@ -169,18 +167,17 @@
             </button>
         </section>
 
-        <!-- پیش‌نمایش سند -->
+        <!-- کادر پیش‌نمایش سند رسمی -->
         <section class="lg:col-span-7 space-y-3 w-full min-w-0">
             
             <div class="no-print flex flex-wrap items-center justify-between bg-slate-800/70 border border-slate-700 px-3 py-2 rounded-xl text-xs gap-2">
-                <span id="lbl-doc-theme" class="text-slate-400 font-medium">استایل سند خروجی:</span>
+                <span id="lbl-doc-theme" class="text-slate-400 font-medium">استایل سند در صفحه نمایش:</span>
                 <div class="flex items-center gap-1.5 w-full sm:w-auto">
                     <button id="btn-doc-theme-light" class="flex-1 sm:flex-none px-3 py-1 rounded-lg bg-white text-slate-900 font-bold border border-slate-300 shadow-sm text-center">روشن</button>
                     <button id="btn-doc-theme-dark" class="flex-1 sm:flex-none px-3 py-1 rounded-lg bg-slate-950 text-slate-300 border border-slate-800 hover:text-white text-center">تیره</button>
                 </div>
             </div>
 
-            <!-- کادر محتوای سند چاپی -->
             <div id="printable-area" class="proposal-paper doc-theme-light rounded-2xl p-4 sm:p-8 shadow-2xl relative min-h-[750px] border transition-colors duration-200 w-full overflow-hidden">
                 
                 <div id="license-watermark" class="watermark-grid">
@@ -235,7 +232,7 @@
 
     </main>
 
-    <!-- مودال ولت‌های کریپتو و لایسنس -->
+    <!-- مودال والت‌های کریپتو و لایسنس -->
     <div id="wallet-modal" class="no-print fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
         <div class="bg-slate-800 border border-slate-700 w-full max-w-lg rounded-2xl p-4 sm:p-6 shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-700 pb-2.5">
