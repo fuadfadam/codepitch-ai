@@ -1,5 +1,5 @@
 /**
- * هسته نرم‌افزاری CodePitch AI v2.0
+ * هسته نرم‌افزاری CodePitch AI v2.1
  * پیاده‌سازی ۱۰۰٪ کلاینت‌محور (Zero-Backend)
  */
 
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             provider: 'ارائه‌دهنده',
             modelName: 'شناسه دقیق مدل (آزاد)',
             generateBtn: 'پردازش و ایجاد سند',
-            docThemeLabel: 'استایل سند خروجی:',
+            docThemeLabel: 'استایل سند در صفحه نمایش:',
             btnLight: 'روشن',
             btnDark: 'تیره',
             emptyState: 'مشخصات را وارد کرده و دکمه پردازش را بزنید.',
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             provider: 'Provider',
             modelName: 'Exact Model Identifier',
             generateBtn: 'Synthesize Document',
-            docThemeLabel: 'Document Output Style:',
+            docThemeLabel: 'Screen Document Style:',
             btnLight: 'Light',
             btnDark: 'Dark',
             emptyState: 'Enter scope details and trigger document generation.',
@@ -235,10 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-print').addEventListener('click', () => window.print());
 
     function getFallbackDiagram() {
-        return `flowchart TD
-    Client["Client Interface"] --> API["Gateway & Validation"]
-    API --> Core["Core Processing Engine"]
-    Core --> Storage[("Persistence Layer")]`;
+        return `flowchart LR
+    A["ورودی سیستم"] --> B["هسته پردازش"]
+    B --> C["پایگاه داده"]
+    B --> D["خروجی نهایی"]`;
     }
 
     async function renderMermaidSafely(code) {
@@ -250,6 +250,11 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const { svg } = await mermaid.render(renderId, target);
             mermaidContainer.innerHTML = svg;
+            const svgEl = mermaidContainer.querySelector('svg');
+            if (svgEl) {
+                svgEl.style.maxHeight = '270px';
+                svgEl.style.width = '100%';
+            }
         } catch (err) {
             console.error('Mermaid render error. Fallback loaded.', err);
             const errEl = document.getElementById('d' + renderId);
@@ -258,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const { svg: fallbackSvg } = await mermaid.render('fallback-' + Date.now(), getFallbackDiagram());
                 mermaidContainer.innerHTML = fallbackSvg;
             } catch (e) {
-                mermaidContainer.innerHTML = '<div class="text-xs text-rose-500 py-3">Diagram rendering exception.</div>';
+                mermaidContainer.innerHTML = '<div class="text-xs text-rose-500 py-3">خطا در رندر دیاگرام.</div>';
             }
         }
     }
@@ -310,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rfp = inputRfpText.value.trim();
         const docType = selectDocType.value;
         const provider = selectProvider.value;
-        const model = inputModelName.value.trim() || 'gemini-3.8-flash';
+        const model = inputModelName.value.trim() || 'gemini-3.1-flash-lite';
 
         if (!rfp) {
             showToast(I18N[currentLang].toastEmptyRfp);
@@ -338,25 +343,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const promptText = `
 You are an expert system architect and documentation lead.
-Language Directive: Write the entire response in the primary language of the Scope/RFP provided below (Persian for Persian, English for English).
+Language Directive: Write the entire response strictly in the language of the input (Persian for Persian, English for English).
 
 Parameters:
 - Target Structure: ${docType}
-- Document Title: ${title}
-- Reference Link: ${repo || 'None'}
-- Scope / Specifications:
+- Title: ${title}
+- Reference: ${repo || 'None'}
+- Scope:
 ${rfp}
 
-Output Requirements:
-Return ONLY an unadorned JSON object containing exactly two fields:
+Return ONLY a pure JSON object containing exactly two keys:
 {
-  "proposal_markdown": "Complete formal document in markdown",
+  "proposal_markdown": "Complete formal document text in markdown",
   "mermaid_code": "Valid Mermaid diagram syntax"
 }
 
-Content Specifications:
-1. "proposal_markdown" must contain clear executive headings, domain analysis, technology matrix or delivery roadmaps, risk mitigations, and an editable markdown table for milestones and budget entries.
-2. "mermaid_code" must use flowchart TD or sequenceDiagram with ASCII-safe node keys (e.g. A, B, C) and quote-wrapped descriptive node labels. Avoid characters that break parsing.
+Diagram Guidelines (CRITICAL FOR A4 PRINTING):
+- Use 'flowchart LR' (Horizontal Left-to-Right) or a compact 2-level branched 'flowchart TD'.
+- NEVER create a long single-column vertical chain of more than 3 steps without branching.
+- Keep maximum 4 to 6 total nodes so the diagram fits in a single view without exceeding 280px in height.
+- Use English alphanumeric node IDs (A, B, C) and quote-wrapped descriptive node labels like A["عنوان"].
 `;
 
         try {
