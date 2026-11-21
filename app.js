@@ -1,10 +1,9 @@
 /**
- * هسته منطقی CodePitch AI v2.0
- * پشتیبانی از چندزبانه، تم‌های مستقل و ولت‌های کریپتو
+ * هسته نرم‌افزاری CodePitch AI v2.0
+ * پیاده‌سازی ۱۰۰٪ کلاینت‌محور (Zero-Backend)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // آدرس‌های واقعی ولت‌ها
     const WALLETS = {
         evm: { label: 'EVM (ETH, BNB, Polygon, Arbitrum, Base, OP)', address: '0x5574432Aa702a60eCF73F20123C775d5bC980C31' },
         sol: { label: 'Solana (SOL, SPL)', address: '84ftXW1r7HbHcr2nUQKNfNCcSFjEqDFqVAK1DiS8rTA1' },
@@ -17,13 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
         atom: { label: 'Cosmos (ATOM)', address: 'cosmos10caa6aufk3t9y9g2jfwjcaxl3j4p9x7jgndzll' }
     };
 
-    // فرهنگ لغات دو زبانه
     const I18N = {
         fa: {
-            subtitle: 'سامانه جامع تولید پرزنتیشن، پروپوزال و دیاگرام',
-            donateBtn: 'حمایت / نسخه Pro',
-            settingsBtn: 'تنظیمات API',
-            printBtn: 'خروجی PDF',
+            subtitle: 'موتور معماری سیستم و پروپوزال',
+            donateBtn: 'حمایت / Pro',
+            settingsBtn: 'تنظیمات',
+            printBtn: 'PDF',
             panelTitle: 'تنظیمات محتوا و صدور سند',
             docType: 'نوع ساختار سند',
             projectTitle: 'عنوان موضوع یا پروژه',
@@ -32,56 +30,55 @@ document.addEventListener('DOMContentLoaded', () => {
             provider: 'ارائه‌دهنده',
             modelName: 'شناسه دقیق مدل (آزاد)',
             generateBtn: 'پردازش و ایجاد سند',
-            docThemeLabel: 'استایل بصری سند خروجی:',
-            btnLight: 'روشن (کاغذ سفید)',
-            btnDark: 'تیره (دارک آفیس)',
-            emptyState: 'مشخصات را در فرم سمت راست وارد کنید و دکمه پردازش را بزنید.',
+            docThemeLabel: 'استایل سند خروجی:',
+            btnLight: 'روشن',
+            btnDark: 'تیره',
+            emptyState: 'مشخصات را وارد کرده و دکمه پردازش را بزنید.',
             diagramTitle: 'دیاگرام ساختاری و جریان داده',
-            docFooter: 'تاییدیه محتوایی و اعتبارسنجی فرآیند',
+            docFooter: 'تاییدیه محتوایی مهندسی سیستم',
             docBadge: 'سند رسمی',
             technicalOption: 'پروپوزال مهندسی و معماری سیستم',
             businessOption: 'طرح کسب‌وکار، ارائه و استارتاپ (Pitch Deck)',
             educationalOption: 'ارائه آموزشی، سرفصل دانشگاهی و اسلاید',
             customOption: 'تحلیل آزاد و مهندسی فرآیند',
-            toastSaved: 'تنظیمات با موفقیت ذخیره شد.',
-            toastNoKey: 'کلید API یافت نشد. لطفاً در تنظیمات وارد کنید.',
-            toastEmptyRfp: 'لطفاً شرح نیازمندی یا موضوع ارائه را وارد کنید.',
+            toastSaved: 'تنظیمات ذخیره شد.',
+            toastNoKey: 'کلید API تنظیم نشده است.',
+            toastEmptyRfp: 'لطفاً شرح مشخصات یا نیازمندی را وارد کنید.',
             toastSuccess: 'سند با موفقیت ایجاد شد.'
         },
         en: {
-            subtitle: 'Universal Proposal, Pitch Deck & Architecture Engine',
+            subtitle: 'Architecture Engine & Proposal Synthesizer',
             donateBtn: 'Sponsor / Pro',
-            settingsBtn: 'API Settings',
-            printBtn: 'Export PDF',
+            settingsBtn: 'Settings',
+            printBtn: 'PDF',
             panelTitle: 'Content & Output Configuration',
             docType: 'Document Structure Type',
-            projectTitle: 'Project or Topic Title',
-            repoUrl: 'Reference Link / Repo URL (Optional)',
-            rfpText: 'Detailed Requirements / Presentation Scope',
-            provider: 'AI Provider',
-            modelName: 'Model Identifier (Freeform)',
-            generateBtn: 'Generate Document',
+            projectTitle: 'Project / Topic Title',
+            repoUrl: 'Reference Repo URL (Optional)',
+            rfpText: 'Detailed Scope & Requirements',
+            provider: 'Provider',
+            modelName: 'Exact Model Identifier',
+            generateBtn: 'Synthesize Document',
             docThemeLabel: 'Document Output Style:',
-            btnLight: 'Light (White Paper)',
-            btnDark: 'Dark (Dark Office)',
-            emptyState: 'Fill the input fields and click Generate Document.',
+            btnLight: 'Light',
+            btnDark: 'Dark',
+            emptyState: 'Enter scope details and trigger document generation.',
             diagramTitle: 'System & Architecture Flowchart',
-            docFooter: 'Formal Verification & Content Approval',
+            docFooter: 'Formal Engineering Sign-off',
             docBadge: 'Official Document',
-            technicalOption: 'Technical Proposal & System Architecture',
+            technicalOption: 'Technical Proposal & Architecture',
             businessOption: 'Business Plan & Pitch Deck',
-            educationalOption: 'Academic Courseware & Presentation',
-            customOption: 'General Process Flow & Analysis',
+            educationalOption: 'Courseware & Slide Presentation',
+            customOption: 'General Process Analysis',
             toastSaved: 'Settings saved successfully.',
-            toastNoKey: 'API Key is missing. Please set it in settings.',
-            toastEmptyRfp: 'Please enter project requirements or description.',
-            toastSuccess: 'Document generated successfully.'
+            toastNoKey: 'API key is missing.',
+            toastEmptyRfp: 'Please enter scope or requirements.',
+            toastSuccess: 'Document synthesized successfully.'
         }
     };
 
     let currentLang = localStorage.getItem('cp_lang') || 'fa';
 
-    // مقداردهی اولیه Mermaid
     mermaid.initialize({
         startOnLoad: false,
         theme: 'default',
@@ -89,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fontFamily: 'Vazirmatn, Inter, sans-serif'
     });
 
-    // ارجاع به المان‌ها
     const btnToggleLang = document.getElementById('btn-toggle-lang');
     const btnToggleUiTheme = document.getElementById('btn-toggle-ui-theme');
     const iconSun = document.getElementById('icon-theme-sun');
@@ -141,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 3500);
     }
 
-    // تغییر زبان رابط کاربری
     function applyLanguage(lang) {
         currentLang = lang;
         localStorage.setItem('cp_lang', lang);
@@ -154,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('txt-donate-btn').textContent = t.donateBtn;
         document.getElementById('txt-settings-btn').textContent = t.settingsBtn;
         document.getElementById('txt-print-btn').textContent = t.printBtn;
-        document.getElementById('lbl-panel-title').innerHTML = t.panelTitle;
+        document.getElementById('lbl-panel-title').innerHTML = `<svg class="w-4 h-4 sm:w-5 sm:h-5 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg> ${t.panelTitle}`;
         document.getElementById('lbl-doc-type').textContent = t.docType;
         document.getElementById('lbl-project-title').textContent = t.projectTitle;
         document.getElementById('lbl-repo-url').textContent = t.repoUrl;
@@ -166,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('btn-doc-theme-light').textContent = t.btnLight;
         document.getElementById('btn-doc-theme-dark').textContent = t.btnDark;
         document.getElementById('lbl-empty-state').textContent = t.emptyState;
-        document.getElementById('lbl-diagram-title').innerHTML = `<span class="w-2.5 h-2.5 bg-brand-500 rounded-full inline-block"></span> ${t.diagramTitle}`;
+        document.getElementById('lbl-diagram-title').innerHTML = `<span class="w-2 h-2 bg-brand-500 rounded-full inline-block"></span> ${t.diagramTitle}`;
         document.getElementById('lbl-doc-footer').textContent = t.docFooter;
         viewDocTypeBadge.textContent = t.docBadge;
 
@@ -180,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         applyLanguage(currentLang === 'fa' ? 'en' : 'fa');
     });
 
-    // تغییر تم UI
     btnToggleUiTheme.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark');
         const isDark = document.documentElement.classList.contains('dark');
@@ -189,35 +183,29 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cp_ui_theme', isDark ? 'dark' : 'light');
     });
 
-    // تغییر تم سند خروجی (کاغذ روشن / کاغذ تیره)
     btnDocThemeLight.addEventListener('click', () => {
-        printableArea.className = 'proposal-paper doc-theme-light rounded-2xl p-8 shadow-2xl relative min-h-[900px] border transition-colors duration-200';
+        printableArea.className = 'proposal-paper doc-theme-light rounded-2xl p-4 sm:p-8 shadow-2xl relative min-h-[750px] border transition-colors duration-200 w-full overflow-hidden';
     });
     btnDocThemeDark.addEventListener('click', () => {
-        printableArea.className = 'proposal-paper doc-theme-dark rounded-2xl p-8 shadow-2xl relative min-h-[900px] border transition-colors duration-200';
+        printableArea.className = 'proposal-paper doc-theme-dark rounded-2xl p-4 sm:p-8 shadow-2xl relative min-h-[750px] border transition-colors duration-200 w-full overflow-hidden';
     });
 
-    // مدیریت ولت‌ها
     walletSelect.addEventListener('change', () => {
-        const item = WALLETS[walletSelect.value];
-        walletAddressDisplay.textContent = item.address;
+        walletAddressDisplay.textContent = WALLETS[walletSelect.value].address;
     });
 
     btnCopyAddress.addEventListener('click', () => {
         navigator.clipboard.writeText(walletAddressDisplay.textContent.trim());
-        showToast(currentLang === 'fa' ? 'آدرس کپی شد.' : 'Address copied.');
+        showToast(currentLang === 'fa' ? 'آدرس در کلیپ‌بورد کپی شد.' : 'Address copied to clipboard.');
     });
 
     btnOpenWallet.addEventListener('click', () => walletModal.classList.remove('hidden'));
     btnCloseWallet.addEventListener('click', () => walletModal.classList.add('hidden'));
 
-    // اعتبارسنجی لایسنس یا هش تراکنش
     function checkLicenseKey(key) {
         if (!key) return false;
         const clean = key.trim();
-        // پذیرش هش معتبر ۶۴ کاراکتری هگز (EVM / Tron / Solana / Doge / etc.)
         const isTx = /^(0x)?[a-fA-F0-9]{64}$/.test(clean) || /^[1-9A-HJ-NP-za-km-z]{64,88}$/.test(clean);
-        // پذیرش کد لایسنس مستقیم
         const isCode = /^CP-PRO-[A-Z0-9]{8,24}$/i.test(clean);
         return isTx || isCode;
     }
@@ -227,15 +215,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkLicenseKey(key)) {
             localStorage.setItem('cp_license_key', key);
             document.body.classList.add('is-pro');
-            licenseResultMsg.textContent = currentLang === 'fa' ? 'لایسنس فعال شد (واترمارک حذف شد).' : 'Pro License Active (Watermark Removed).';
-            licenseResultMsg.className = 'text-[11px] text-emerald-400 font-bold';
-            showToast(currentLang === 'fa' ? 'لایسنس Pro با موفقیت اعمال گردید.' : 'Pro license applied.');
+            licenseResultMsg.textContent = currentLang === 'fa' ? 'لایسنس تایید شد (واترمارک غیرفعال شد).' : 'Pro License Active (Watermark Disabled).';
+            licenseResultMsg.className = 'text-[10px] text-emerald-400 font-bold';
+            showToast(currentLang === 'fa' ? 'لایسنس اعمال گردید.' : 'License validated.');
         } else {
-            showToast(currentLang === 'fa' ? 'هش یا کلید نامعتبر است.' : 'Invalid hash or key.');
+            showToast(currentLang === 'fa' ? 'فرمت شناسه نامعتبر است.' : 'Invalid hash/key format.');
         }
     });
 
-    // باز و بسته کردن تنظیمات API
     btnOpenSettings.addEventListener('click', () => settingsModal.classList.remove('hidden'));
     btnCloseSettings.addEventListener('click', () => settingsModal.classList.add('hidden'));
     btnSaveSettings.addEventListener('click', () => {
@@ -245,15 +232,13 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast(I18N[currentLang].toastSaved);
     });
 
-    // پرینت
     document.getElementById('btn-print').addEventListener('click', () => window.print());
 
-    // رندر ایمن دیاگرام Mermaid
     function getFallbackDiagram() {
         return `flowchart TD
-    NodeA["ورودی سیستم"] --> NodeB["پردازش و منطق"]
-    NodeB --> NodeC["پایگاه داده"]
-    NodeB --> NodeD["خروجی نهایی"]`;
+    Client["Client Interface"] --> API["Gateway & Validation"]
+    API --> Core["Core Processing Engine"]
+    Core --> Storage[("Persistence Layer")]`;
     }
 
     async function renderMermaidSafely(code) {
@@ -266,19 +251,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const { svg } = await mermaid.render(renderId, target);
             mermaidContainer.innerHTML = svg;
         } catch (err) {
-            console.error('Mermaid render failure:', err);
+            console.error('Mermaid render error. Fallback loaded.', err);
             const errEl = document.getElementById('d' + renderId);
             if (errEl) errEl.remove();
             try {
                 const { svg: fallbackSvg } = await mermaid.render('fallback-' + Date.now(), getFallbackDiagram());
                 mermaidContainer.innerHTML = fallbackSvg;
             } catch (e) {
-                mermaidContainer.innerHTML = '<div class="text-xs text-rose-500 py-3">Diagram render error.</div>';
+                mermaidContainer.innerHTML = '<div class="text-xs text-rose-500 py-3">Diagram rendering exception.</div>';
             }
         }
     }
 
-    // فراخوانی Gemini API
     async function callGemini(apiKey, model, prompt) {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
         const res = await fetch(url, {
@@ -291,13 +275,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         if (!res.ok) {
             const err = await res.json();
-            throw new Error(err.error?.message || `Google API Error (${res.status})`);
+            throw new Error(err.error?.message || `Google API status ${res.status}`);
         }
         const data = await res.json();
         return JSON.parse(data.candidates[0].content.parts[0].text);
     }
 
-    // فراخوانی Groq API
     async function callGroq(apiKey, model, prompt) {
         const url = 'https://api.groq.com/openai/v1/chat/completions';
         const res = await fetch(url, {
@@ -306,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({
                 model: model,
                 messages: [
-                    { role: 'system', content: 'You are an elite system architect and business consultant. Return ONLY a single raw valid JSON object.' },
+                    { role: 'system', content: 'You are an elite software architect and strategist. Return ONLY a single raw valid JSON object.' },
                     { role: 'user', content: prompt }
                 ],
                 response_format: { type: "json_object" },
@@ -315,15 +298,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         if (!res.ok) {
             const err = await res.json();
-            throw new Error(err.error?.message || `Groq API Error (${res.status})`);
+            throw new Error(err.error?.message || `Groq API status ${res.status}`);
         }
         const data = await res.json();
         return JSON.parse(data.choices[0].message.content);
     }
 
-    // پردازش فرم
     btnGenerate.addEventListener('click', async () => {
-        const title = inputProjectTitle.value.trim() || 'Untitled Project';
+        const title = inputProjectTitle.value.trim() || 'Untitled Scope';
         const repo = inputRepoUrl.value.trim();
         const rfp = inputRfpText.value.trim();
         const docType = selectDocType.value;
@@ -352,34 +334,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnGenerate.disabled = true;
         generateSpinner.classList.remove('hidden');
-        generateBtnText.textContent = currentLang === 'fa' ? `در حال پردازش با ${model}...` : `Processing with ${model}...`;
+        generateBtnText.textContent = currentLang === 'fa' ? `پردازش با ${model}...` : `Synthesizing with ${model}...`;
 
         const promptText = `
-You are a senior enterprise architect and business consultant.
-Language requirement: Generate the text STRICTLY in the language of this prompt (if RFP is Persian write in Persian, if English write in English).
+You are an expert system architect and documentation lead.
+Language Directive: Write the entire response in the primary language of the Scope/RFP provided below (Persian for Persian, English for English).
 
-Document Type: ${docType}
-Project Title: ${title}
-Reference: ${repo || 'N/A'}
-Details/Scope:
+Parameters:
+- Target Structure: ${docType}
+- Document Title: ${title}
+- Reference Link: ${repo || 'None'}
+- Scope / Specifications:
 ${rfp}
 
-Return a single JSON object with EXACTLY two keys:
+Output Requirements:
+Return ONLY an unadorned JSON object containing exactly two fields:
 {
-  "proposal_markdown": "Full structured document text in markdown",
-  "mermaid_code": "Clean valid Mermaid diagram code (flowchart TD or mindmap)"
+  "proposal_markdown": "Complete formal document in markdown",
+  "mermaid_code": "Valid Mermaid diagram syntax"
 }
 
-Requirements for proposal_markdown:
-- Comprehensive breakdown tailored to document type (${docType}).
-- Include Executive Summary, Architecture/Core Strategy, Implementation Phases, Risk Matrix.
-- Include a Markdown Table with estimated timelines and an empty column for pricing/cost estimation.
-
-Requirements for mermaid_code:
-- Valid flowchart TD or mindmap.
-- English alphanumeric node IDs (A, B, C).
-- Text labels wrapped strictly in quotes: A["Label Here"].
-- Do NOT use parenthesis or syntax-breaking characters inside label texts.
+Content Specifications:
+1. "proposal_markdown" must contain clear executive headings, domain analysis, technology matrix or delivery roadmaps, risk mitigations, and an editable markdown table for milestones and budget entries.
+2. "mermaid_code" must use flowchart TD or sequenceDiagram with ASCII-safe node keys (e.g. A, B, C) and quote-wrapped descriptive node labels. Avoid characters that break parsing.
 `;
 
         try {
@@ -410,7 +387,6 @@ Requirements for mermaid_code:
         }
     });
 
-    // بارگذاری تنظیمات اولیه
     inputGeminiKey.value = localStorage.getItem('cp_gemini_key') || '';
     inputGroqKey.value = localStorage.getItem('cp_groq_key') || '';
     const savedLicense = localStorage.getItem('cp_license_key') || '';
@@ -418,7 +394,7 @@ Requirements for mermaid_code:
     if (checkLicenseKey(savedLicense)) {
         document.body.classList.add('is-pro');
         licenseResultMsg.textContent = 'Pro License Active';
-        licenseResultMsg.className = 'text-[11px] text-emerald-400 font-bold';
+        licenseResultMsg.className = 'text-[10px] text-emerald-400 font-bold';
     }
 
     applyLanguage(currentLang);
